@@ -12,6 +12,7 @@ export default function Home() {
   const [rentListings, setRentListings] = useState([]);
   SwiperCore.use([Navigation]);
   console.log(offerListings);
+
   useEffect(() => {
     const fetchOfferListings = async () => {
       try {
@@ -40,11 +41,16 @@ export default function Home() {
         const data = await res.json();
         setSaleListings(data);
       } catch (error) {
-        log(error);
+        console.log(error);
       }
     };
     fetchOfferListings();
   }, []);
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(price);
+  };
+
   return (
     <div>
       {/* top */}
@@ -73,21 +79,19 @@ export default function Home() {
         {offerListings &&
           offerListings.length > 0 &&
           offerListings.map((listing) => (
-            <SwiperSlide>
+            <SwiperSlide key={listing._id}>
               <div
                 style={{
                   background: `url(${listing.imageUrls[0]}) center no-repeat`,
                   backgroundSize: 'cover',
                 }}
                 className='h-[500px]'
-                key={listing._id}
               ></div>
             </SwiperSlide>
           ))}
       </Swiper>
 
       {/* listing results for offer, sale and rent */}
-
       <div className='max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10'>
         {offerListings && offerListings.length > 0 && (
           <div className=''>
@@ -97,7 +101,7 @@ export default function Home() {
             </div>
             <div className='flex flex-wrap gap-4'>
               {offerListings.map((listing) => (
-                <ListingItem listing={listing} key={listing._id} />
+                <ListingItem listing={listing} key={listing._id} formatPrice={formatPrice} />
               ))}
             </div>
           </div>
@@ -110,7 +114,7 @@ export default function Home() {
             </div>
             <div className='flex flex-wrap gap-4'>
               {rentListings.map((listing) => (
-                <ListingItem listing={listing} key={listing._id} />
+                <ListingItem listing={listing} key={listing._id} formatPrice={formatPrice} />
               ))}
             </div>
           </div>
@@ -123,7 +127,7 @@ export default function Home() {
             </div>
             <div className='flex flex-wrap gap-4'>
               {saleListings.map((listing) => (
-                <ListingItem listing={listing} key={listing._id} />
+                <ListingItem listing={listing} key={listing._id} formatPrice={formatPrice} />
               ))}
             </div>
           </div>
