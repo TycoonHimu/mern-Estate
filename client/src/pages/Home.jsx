@@ -61,7 +61,7 @@ export default function Home() {
           place with ease
         </h1>
         <div className='text-gray-400 text-xs sm:text-sm'>
-          Sahand Estate is the best place to find your next perfect place to
+          NestFInder Estate is the best place to find your next perfect place to
           live.
           <br />
           We have a wide range of properties for you to choose from.
@@ -75,7 +75,11 @@ export default function Home() {
       </div>
 
       {/* swiper */}
-      <Swiper navigation>
+      <Swiper  modules={[Navigation]}
+      // slidesPerView={2}  // Show 2 images at a time
+      // spaceBetween={30} // Space between slides
+      navigation        // Enable navigation buttons
+      className='mySwiper'>
         {offerListings &&
           offerListings.length > 0 &&
           offerListings.map((listing) => (
@@ -83,7 +87,7 @@ export default function Home() {
               <div
                 style={{
                   background: `url(${listing.imageUrls[0]}) center no-repeat`,
-                  backgroundSize: 'cover',
+                  backgroundSize: 'contain',
                 }}
                 className='h-[500px]'
               ></div>
