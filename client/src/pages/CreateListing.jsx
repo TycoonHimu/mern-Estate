@@ -8,6 +8,7 @@ import {
 import { app } from "../firebase.js";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Footer from '../components/Footer';
 
 const CreateListing = () => {
   const [files, setFiles] = useState([]);
@@ -360,9 +361,13 @@ const CreateListing = () => {
             {loading ? "Creating..." : "Create Listing"}
           </button>
           {error && <p className="text-red-700 text-sm">{error}</p>}
+          
         </div>
       </form>
+      <div><Footer/></div>
     </main>
+    
+    
   );
 };
 

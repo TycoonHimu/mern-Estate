@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
+import NewsLetter from '../components/NewsLetter';
 import SwiperCore from 'swiper';
 import 'swiper/css/bundle';
 import ListingItem from '../components/ListingItem';
+import Footer from '../components/Footer';
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
@@ -137,6 +139,9 @@ export default function Home() {
           </div>
         )}
       </div>
+      <NewsLetter />
+      <Footer />
     </div>
+    
   );
 }
